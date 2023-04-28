@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,7 +15,19 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
+/*
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+*/
+
+Route::get('/products', function () {
+    return json_encode(ProductController::getAllProducts());
+});
+
+Route::get('/products/{id}', function ($id) {
+    if(is_numeric($id))
+        return json_encode(ProductController::getProductById($id));
+    else
+        return json_encode(ProductController::getProductsByIds(explode(',', $id)));
 });
