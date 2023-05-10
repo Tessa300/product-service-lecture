@@ -11,12 +11,12 @@ class ProductController extends Controller
 {
     public static function getAllProducts () {
         $allProducts = DB::table('products')->select()->orderBy('name')->get();
-        return json_encode($allProducts);
+        return $allProducts;
     }
 
     public static function getProductById(int $id) {
         $product = DB::table('products')->where('id', $id)->get();
-        return json_encode($product);
+        return $product;
     }
 
     public static function getProductsByIds(array $ids){
